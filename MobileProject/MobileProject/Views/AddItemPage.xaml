@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:MobileProject.Controls" xmlns:suave="clr-namespace:MobilProject.Render"
+             x:Class="MobileProject.Views.AddItemPage"
+              BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="entrystyle" TargetType="controls:StandardEntry">
+                <Setter Property="Margin" Value="10,2" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="Gray" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+            <Style x:Key="pickerstyle" TargetType="Picker">
+                <Setter Property="Margin" Value="10,2" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BackgroundColor" Value="White" />
+            </Style>
+            <Style x:Key="buttonstyle" TargetType="Button">
+                <Setter Property="BorderColor" Value="Green" />
+                <Setter Property="Margin" Value="10,2,0,0" />
+                <Setter Property="BorderWidth" Value="2" />
+                <Setter Property="CornerRadius" Value="40" />
+                <Setter Property="BackgroundColor" Value="Green" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="AddIconStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HeightRequest" Value="54" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="12, 0" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+
+                <Grid RowSpacing="2" ColumnSpacing="0" >
+
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height="50" />
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label TextColor="White" FontSize="Body" Text="Name :" Margin="2" VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" />
+                    <Label TextColor="White" FontSize="Body" Text="Date :" Margin="2" VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" />
+                    <Label TextColor="White" FontSize="Body" Text="Importance :" Margin="2" VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" />
+                    <Label  TextColor="White" FontSize="Body" Text="Class :" Margin="2" Grid.Row="4" VerticalTextAlignment="Center" Grid.Column="0"/>
+                    <Label  TextColor="White" FontSize="Body" Text="Note :" Margin="2" Grid.Row="5" VerticalTextAlignment="Center" Grid.Column="0"/>
+                    <controls:StandardEntry x:Name="nameentry"  Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="1" Style="{StaticResource entrystyle}" Placeholder="Name" />
+                    <suave:BorderlessDatePicker x:Name="DatePicker" BackgroundColor="White" Margin="10,0,10,0" TextColor="Black" Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="2"   Format="dd MMMM yyyy" FontSize="Large"    
+                Date="{Binding SelectedDate}"/>
+                    <Picker   x:Name="colorpicker" BackgroundColor="AliceBlue" TextColor="Black"  Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="3" Style="{StaticResource pickerstyle}"  >
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Urgent</x:String>
+                                <x:String>Important</x:String>
+                                <x:String>UnImportant</x:String>
+            
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Picker  x:Name="classpicker" BackgroundColor="AliceBlue" TextColor="Black"  Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="4" Style="{StaticResource pickerstyle}"  >
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Fun</x:String>
+                                <x:String>Lecture</x:String>
+                                <x:String>Market</x:String>
+                                <x:String>Travel</x:String>
+                                <x:String>General</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <controls:StandardEntry x:Name="itementry"  Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="5" Style="{StaticResource entrystyle}" Placeholder="Item" />
+                    <Image Grid.Column="4" Grid.Row="5" Source="add.png" Style="{StaticResource AddIconStyle}" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                             Tapped="additem"
+                               NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Frame BorderColor="{StaticResource BackgroundColor}" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="4"  HeightRequest="200" Margin="10,0,10,0">
+                        <ListView x:Name="itemlistview" SeparatorVisibility="None" IsPullToRefreshEnabled="True" >
+                            <ListView.Header>
+                                <Label FontSize="Body" HorizontalOptions="Start" Text="Notes" Margin="0"/>
+                            </ListView.Header>
+                            <ListView.ItemTemplate>
+                                <DataTemplate >
+                                <ViewCell >
+                                    <SwipeView Threshold="100" >
+                                            <SwipeView.LeftItems>
+                                                <SwipeItems Mode="Execute">
+                                                    <SwipeItem Text="Delete"
+                                                   BackgroundColor="Red"
+                                                   CommandParameter="{Binding .}"
+                                                   Invoked="deleteinvoke"
+                                                />
+                                                </SwipeItems>
+                                            </SwipeView.LeftItems>
+                                            <StackLayout>
+                                                <Label x:Name="idlabel"  Text ="{Binding Name}"  ></Label>
+                                            </StackLayout>
+                                    </SwipeView>
+                                </ViewCell>
+                            </DataTemplate>
+
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    </Frame>
+
+                    <Button Text="Save"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Clicked="savedata" Style="{StaticResource buttonstyle}">
+                    </Button>
+ 
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
