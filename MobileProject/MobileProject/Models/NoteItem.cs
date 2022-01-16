@@ -26,10 +26,10 @@ namespace MobileProject.Models
             }
         }
 
-        public List<ShoppingDetailItem> Items { get; set; }
+        public List<NoteDetailItem> Items { get; set; }
     }
 
-    public class ShoppingDetailItem
+    public class NoteDetailItem
     {
         public string Id { get; set; }
         public string Name { get; set; }

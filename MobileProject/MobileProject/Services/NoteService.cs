@@ -30,7 +30,7 @@ namespace MobileProject.Services
             List<ReminderItemDB> reminderitem = db.GetReminderItem();
             reminder.ForEach(re =>
             {
-                List<ShoppingDetailItem> Items = new List<ShoppingDetailItem>();
+                List<NoteDetailItem> Items = new List<NoteDetailItem>();
 
                 reminderitem.ForEach(reitem =>
                 {
@@ -41,7 +41,7 @@ namespace MobileProject.Services
                         Console.WriteLine("reminderitem:" + re.Id);
                         
                         Items.Add(
-                        new ShoppingDetailItem {Id=reitem.Id.ToString(), Name = reitem.Name,Done=reitem.IsDone,IsLatest=false,IsDoneImg=reitem.IsDoneImg }
+                        new NoteDetailItem { Id=reitem.Id.ToString(), Name = reitem.Name,Done=reitem.IsDone,IsLatest=false,IsDoneImg=reitem.IsDoneImg }
                     );
                     }
                 });
