@@ -33,10 +33,7 @@ namespace MobileProject.Views
         {
             var item = (SwipeItem)sender;
             var list1 = item.CommandParameter;
-
             list.Remove((Items)list1);
-
-            itemlistview.ItemsSource = list;
         }
         void SelectedDate(object sender, DateChangedEventArgs args)
         {
