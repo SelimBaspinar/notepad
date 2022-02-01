@@ -91,5 +91,12 @@ namespace MobileProject.Views
 
 
         }
+
+        public async void goaddpage(object sender, EventArgs e)
+        {
+
+            await Navigation.PushAsync(new AddItemPage());
+
+        }
     }
 }

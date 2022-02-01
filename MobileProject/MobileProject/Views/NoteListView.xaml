@@ -13,7 +13,7 @@ xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.Comm
             <Style x:Key="TitleTextStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource TextColor}" />
                 <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Start" />
             </Style>
 
             <Style x:Key="ExpandeLayoutStyle" TargetType="Grid">
@@ -67,14 +67,35 @@ xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.Comm
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Margin" Value="12, 0" />
             </Style>
-
+            <Style x:Key="GoAddIconStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HeightRequest" Value="34" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="Margin" Value="12, 0" />
+                <Setter Property="BackgroundColor" Value="{StaticResource BarBackgroundColor}" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <NavigationPage.TitleView>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Label
-                Text="Note List"
+                Text="Note List" Grid.Column="0" VerticalOptions="Center"
                 Style="{StaticResource TitleTextStyle}"/>
+            <Image
+                 Grid.Column="1"
+                 Source="add.png"
+                 Style="{StaticResource GoAddIconStyle}" >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                     Tapped="goaddpage" 
+                     NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
         </Grid>
         </NavigationPage.TitleView>
     <ContentPage.BindingContext>

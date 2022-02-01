@@ -11,7 +11,7 @@ namespace MobileProject
         {
             InitializeComponent();
 
-            MainPage = new CustomNavigationPage(new AddItemPage());
+            MainPage = new CustomNavigationPage(new ShoppingListView());
         }
 
         protected override void OnStart()
